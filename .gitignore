@@ -1,1 +1,4 @@
 yii/
+protected/config/main.php
+/nbproject/private/
+/nbproject
