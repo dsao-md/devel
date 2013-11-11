@@ -1,25 +1,23 @@
 <?php
 
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+// Folgende Pfad-Aliase sind gepflegt
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
+// Folgend die Hauptkonfiguration
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'DSAo-Md',
         'theme'=>'bootstrap',
-	// preloading 'log' component
+	// Vorladen der Log-Komponente
 	'preload'=>array('log'),
 
-	// autoloading model and component classes
+	// Automatisches laden von Modellen und Komponenten-Klassen
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
 	),
 
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
+		// Das Gii-Modul (Code-Generierung etc pp)
 
 		'gii'=>array(
 			'generatorPaths'=>array(
@@ -33,10 +31,10 @@ return array(
 
 	),
 
-	// application components
+	// Applikations-Komponenten
 	'components'=>array(
 		'user'=>array(
-			// enable cookie-based authentication
+			// Aktiviere cookie-basierte Authentifikation
 			'allowAutoLogin'=>true,
 		),
 
@@ -52,8 +50,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
-		// uncomment the following to use a MySQL database
-		/*
+		// Folgend die MySQL Verbindung
+
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
 			'emulatePrepare' => true,
@@ -61,11 +59,13 @@ return array(
 			'password' => '',
 			'charset' => 'utf8',
 		),
-		*/
+
 		'errorHandler'=>array(
-			// use 'site/error' action to display errors
+			// Auf der Seite site/error werden die Error-Meldungen angezeigt
 			'errorAction'=>'site/error',
 		),
+
+		// Das Bootstrap Layout
 	        'bootstrap'=>array(
         	    'class'=>'bootstrap.components.Bootstrap',
 	        ),
@@ -77,7 +77,7 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
+				// Kommentar entfernen um Logmeldungen auf der HP angezeigt zu bekommen
 				/*
 				array(
 					'class'=>'CWebLogRoute',
@@ -87,10 +87,10 @@ return array(
 		),
 	),
 
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
+	// Applikations-Level Parameter, auf denen zugegriffen werden koennen
+	// using Yii::app()->params['paramName'] -> z.B. Yii::app()->params['adminEmail'] gibt tbanus1@gmail.com zurueck
 	'params'=>array(
-		// this is used in contact page
+		// adminEmail wird im Kontaktformular verwendet
 		'adminEmail'=>'tbanus1@gmail.com',
 	),
 );
