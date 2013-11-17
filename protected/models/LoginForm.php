@@ -1,10 +1,10 @@
 <?php
 
 /**
- * LoginForm class.
- * LoginForm is the data structure for keeping
- * user login form data. It is used by the 'login' action of 'SiteController'.
- */
+ * LoginForm Klasse
+ * LoginForm ist die Datenstruktur für das Bereitstellen der 
+ * Benutzerlogin Formulardaten. Wird von der 'login' action vom SiteController genutzt
+  */
 class LoginForm extends CFormModel
 {
 	public $username;
@@ -14,37 +14,45 @@ class LoginForm extends CFormModel
 	private $_identity;
 
 	/**
-	 * Declares the validation rules.
-	 * The rules state that username and password are required,
-	 * and password needs to be authenticated.
+	 * Deklariert die Gültigkeitsregeln.
+	 * Die Regeln überprüfen, ob der Benutzername und Passwort gegeben sind
+	 * und dass das Passwort für die Authentifizierung notwendig ist
 	 */
 	public function rules()
 	{
 		return array(
-			// username and password are required
+		   /**
+		    * Benutzername und Passwort sind notwendig
+		    */
 			array('username, password', 'required'),
-			// rememberMe needs to be a boolean
+
+         /**
+          * rememberMe muss boolean sein (true, false)
+          */
 			array('rememberMe', 'boolean'),
-			// password needs to be authenticated
+			
+			/**
+			 * Passwort muss authentifiziert sein
+			 */
 			array('password', 'authenticate'),
 		);
 	}
 
 	/**
-	 * Declares attribute labels.
+	 * Deklariert die Attribut-Beschriftungen
 	 */
 	public function attributeLabels()
 	{
 		return array(
-			'rememberMe'=>'Anmeldung beim nächsten mal merken',
-			'username'=>'Benutzername',
-			'password'=>'Passwort',
+			'rememberMe' => 'Anmeldung beim nächsten mal merken',
+			'username'   => 'Benutzername',
+			'password'   => 'Passwort',
 		);
 	}
 
 	/**
-	 * Authenticates the password.
-	 * This is the 'authenticate' validator as declared in rules().
+	 * Authentifiziert das Passwort
+	 * Dies ist die 'authenticate' Überprüfung, welche in rules() deklariert ist 
 	 */
 	public function authenticate($attribute,$params)
 	{
@@ -57,8 +65,8 @@ class LoginForm extends CFormModel
 	}
 
 	/**
-	 * Logs in the user using the given username and password in the model.
-	 * @return boolean whether login is successful
+	 * Loggt den Benutzer mit dem angegebenen Benutzernamen und Passwort im Model ein
+	 * @return boolean wenn der Login erfolgreich war
 	 */
 	public function login()
 	{
@@ -69,7 +77,7 @@ class LoginForm extends CFormModel
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
-			$duration=$this->rememberMe ? 3600*24*30 : 0; // 30 Tage
+			$duration=$this->rememberMe ? 3600*24*30 : 0; /** Entspricht 30 Tage */
 			Yii::app()->user->login($this->_identity,$duration);
 			return true;
 		}
