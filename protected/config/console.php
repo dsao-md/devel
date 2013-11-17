@@ -9,6 +9,21 @@ return array(
 	// preloading 'log' component
 	'preload'=>array('log'),
 
+        'modules'=>array(  // Fuer Werte-Beschreibung siehe main-Config
+	        'user'=>array(
+	            'hash' => 'md5',
+	            'sendActivationMail' => true,
+	            'loginNotActiv' => false,
+	            'activeAfterRegister' => false,
+	            'autoLogin' => true,
+	            'registrationUrl' => array('/user/registration'),
+	            'recoveryUrl' => array('/user/recovery'),
+	            'loginUrl' => array('/user/login'),
+	            'returnUrl' => array('/user/profile'),
+	            'returnLogoutUrl' => array('/user/login'),
+	        ),
+	    ),
+
 	// application components
 	'components'=>array(
 		'db'=>array(
