@@ -29,11 +29,61 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+            array(
+               'label'=>Yii::t('menu','home'),
+               'url'=>array('/site/index')
+            ),
+            array(
+               'label'=>Yii::t('menu','about_us'),
+               'url'=>array('/site/page', 'view'=>'about'),
+               'items'=>array(
+                  array(
+                     'label'=>Yii::t('menu','project'),
+                     'url'=>array('/site/page', 'view'=>'project')
+                  ),
+                  array(
+                     'label'=>Yii::t('menu','history'),
+                     'url'=>array('/site/page',
+                     'view'=>'history')
+                  ),
+                  array(
+                     'label'=>Yii::t('menu','team'),
+                     'url'=>array('/site/page',
+                     'view'=>'team')
+                  ),
+                  array(
+                     'label'=>Yii::t('menu','thanks'),
+                     'url'=>array('/site/page', 'view'=>'thanks')
+                  ),
+                  array(
+                     'label'=>Yii::t('menu','contact'),
+                     'url'=>array('/site/contact')
+                  ),
+               ) 
+            ),
+				array(
+				   'label'=>'About', 
+				   'url'=>array('/site/page', 'view'=>'about')
+				),
+				array(
+				   'label'=>Yii::t('menu','contact'),
+				   'url'=>array('/site/contact')
+				),
+				array(
+				   'label'=>Yii::t('menu','rights'),
+				   'url'=>array('/rights'),
+				//   'visible'=>Yii::app()->user->isAdmin
+				),
+				array(
+				   'label'=>'Login', 
+				   'url'=>array('/user/login'), 
+				   'visible'=>Yii::app()->user->isGuest
+				),
+				array(
+				   'label'=>'Logout ('.Yii::app()->user->name.')', 
+				   'url'=>array('/user/logout'), 
+				   'visible'=>!Yii::app()->user->isGuest
+				)
 			),
 		)); ?>
 	</div><!-- Hauptmenue -->
@@ -49,7 +99,6 @@
 
 	<div id="footer">
 		Copyleft &copy; 2007-2013 by DSAo-Md. Released under GPL3. <i>Release: not released yet</i><br/>
-		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
 </div><!-- page -->
