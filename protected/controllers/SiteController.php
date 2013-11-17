@@ -2,19 +2,27 @@
 
 class SiteController extends Controller
 {
+   
 	/**
-	 * Declares class-based actions.
+	 * Deklariert Klassenbasierte Aktionen
 	 */
 	public function actions()
 	{
 		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
+		
+         /**
+          * Captcha Aktion rendert das CAPTCHA Bild z.B. auf der Kontakt-Seite
+          */
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
 			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
+			
+			/**
+			 * Die "page-action" rendert die statischen Seiten, welche unter 
+			 * /protected/views/site/pages gespeichert sind.
+			 * Aufgerufen werden sie ueber: index.php/site/page&view=Dateiname
+			 */
 			'page'=>array(
 				'class'=>'CViewAction',
 			),
@@ -22,18 +30,20 @@ class SiteController extends Controller
 	}
 
 	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
+	 * Dies ist die default index-Aktion. Sie wird aufgerufen, wenn eine Aktion
+	 * nicht explizit von einem User genannt wird.
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
+	   /**
+	    * Rendert die View-Datei 'protected/views/site/index.php'
+	    * und benutzt hierbei das default-Layout 'protected/views/layouts/main.php'
+	    */
 		$this->render('index');
 	}
 
 	/**
-	 * This is the action to handle external exceptions.
+	 * Dies ist die Aktion, die externe Ausnahmen behandelt.
 	 */
 	public function actionError()
 	{
@@ -47,7 +57,7 @@ class SiteController extends Controller
 	}
 
 	/**
-	 * Displays the contact page
+	 * Zeigt die Kontakt-Seite, incl. Mail-Handler
 	 */
 	public function actionContact()
 	{
@@ -73,33 +83,42 @@ class SiteController extends Controller
 	}
 
 	/**
-	 * Displays the login page
+	 * Zeigt die Login-Seite
 	 */
 	public function actionLogin()
 	{
 		$model=new LoginForm;
 
-		// if it is ajax validation request
+		/**
+		 * Wenn es eine AJAX Validierungs-Anfrage ist
+		 */
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 
-		// collect user input data
+		/**
+		 * Sammeln der User-Input-Daten
+		 */
 		if(isset($_POST['LoginForm']))
 		{
 			$model->attributes=$_POST['LoginForm'];
-			// validate user input and redirect to the previous page if valid
+			
+			/**
+			 * Überprüft die Benutzer-eingaben und leitet zur vorherigen Seite weiter, wenn gültig 
+			 */
 			if($model->validate() && $model->login())
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
-		// display the login form
+		/**
+		 * Anzeige des Login-Formulares
+		 */
 		$this->render('login',array('model'=>$model));
 	}
 
 	/**
-	 * Logs out the current user and redirect to homepage.
+	 * Loggt den aktuellen Benutzer aus und leitet zur Index-Seite weiter
 	 */
 	public function actionLogout()
 	{
