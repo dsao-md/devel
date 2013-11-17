@@ -81,48 +81,4 @@ class SiteController extends Controller
 		}
 		$this->render('contact',array('model'=>$model));
 	}
-
-	/**
-	 * Zeigt die Login-Seite
-	 */
-	public function actionLogin()
-	{
-		$model=new LoginForm;
-
-		/**
-		 * Wenn es eine AJAX Validierungs-Anfrage ist
-		 */
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-
-		/**
-		 * Sammeln der User-Input-Daten
-		 */
-		if(isset($_POST['LoginForm']))
-		{
-			$model->attributes=$_POST['LoginForm'];
-			
-			/**
-			 * Überprüft die Benutzer-eingaben und leitet zur vorherigen Seite weiter, wenn gültig 
-			 */
-			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
-		}
-		/**
-		 * Anzeige des Login-Formulares
-		 */
-		$this->render('login',array('model'=>$model));
-	}
-
-	/**
-	 * Loggt den aktuellen Benutzer aus und leitet zur Index-Seite weiter
-	 */
-	public function actionLogout()
-	{
-		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
-	}
 }
